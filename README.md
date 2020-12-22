@@ -1,4 +1,4 @@
-# Mercuryo SDK
+# Mobile SDK
 
 ![Mercuryo Logo](documentation/img/logo.png "Mercuryo Logo")
 
