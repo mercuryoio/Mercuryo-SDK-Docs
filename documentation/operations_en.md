@@ -92,7 +92,7 @@ sell.convert(fromCurrency: String, toCurrency: String, amount: String) : Convert
 
 ## Selling
 
-Для совершения покупки необходимо [сформировать токен](#формирование-токена-для-продажи) и вызвать метод.
+To sell you need to [get token for selling](#getting-token-for-selling) first call method as shown below.
 
 ```kotlin
 sell.commit(cardId: String, sellToken: String): TransactionStatus
@@ -101,11 +101,11 @@ sell.commit(cardId: String, sellToken: String): TransactionStatus
 | Parameter | Description                                                                          |
 | --------- | ------------------------------------------------------------------------------------ |
 | cardId    | ID of card in Mercuryo                                                               |
-| sellToken | Токен сформированный методом [`sell.convert(...)`](#формирование-токена-для-продажи) |
+| sellToken | Token obtained from [`sell.convert(...)`](#getting-token-for-selling)                |
 
-## Получение курса для продажи
+## Getting exchange rate for selling
 
-Курс включает в себя комиссию для продажи.
+Rate includes a fee.
 
 ```kotlin
 sell.rate(fromCurrency: String, toCurrency: String): Rate
@@ -129,32 +129,30 @@ Before sending crypto it may be beneficial for user to know how amount converts 
 withdraw.convert(fromCurrency: String, toCurrency: String, amount: String) : ConverterResult
 ```
 
-## Комиссия за перевод
+## Withdrawal fees
 
-Перед совершением превода необходимо получить комиссию для перевода. При отсутвии комиссии метод выбросит ошибку `CurrencyNotSupportFeeException`.
+To make withdrawal you need to obtain available blockchain fees first. In case there are no fees this method will throw an `CurrencyNotSupportFeeException` exception.
 
 ```kotlin
 withdraw.getEstimateFee(currency: String, fiatCurrency: String, address: String, amount: String): EstimateWithdrawFee
 ```
 
-
-## Совершение перевода
+## Make a withdrawal
 
 ```kotlin
 withdraw.commit(currency: String, address: String, amount: String, estimateId: String?): VerifyMetaData
 ```
 
-| Поле       | Описание                                                                                                              |
+| Fields       | Description                                                                                                              |
 | ---------- | --------------------------------------------------------------------------------------------------------------------- |
-| currency   | Криптовалюта                                                                                                          |
-| address    | Адресс кошелька для перевода                                                                                          |
-| amount     | Сумма для перевода в крипте                                                                                           |
-| estimateId | Идентификатор комиссии выбранной пользователем, смотреть метод      [`withdraw.getEstimateFee`](#комиссия-за-перевод) |
+| currency   | Crypto                                                                                                          |
+| address    | Wallet address                                                                                           |
+| amount     | Amount of withdrawal in crypto                                                                                            |
+| estimateId | ID of estimation fee obtained on the previous step, see method [`withdraw.getEstimateFee`](#withdrawal-fees) |
 
-## Подтверждени перевода
+## Withdrawal confirmation
 
-Для завершения необходимо подтвердить перевод.
-
+User may need to confirm withdrawal using text message or email code.
 
 ```kotlin
 withdraw.verify(next: VerifyMetaData.NextStep, key: String, code: String): TransactionStatus

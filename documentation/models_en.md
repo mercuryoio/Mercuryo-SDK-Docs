@@ -95,31 +95,32 @@ Identification status of the user. Choices are `INCOMPLETE`, `UNDER_REVIEW`, `CO
 
 ## `DocumentDetails`
 
-Модель содержит информацию о проблемах предоставленных документов. 
-| Name        | Type                                      | Description                                |
+Model containing data regarding possible errors in submitted verification documents.
+
+| Name        | Type                                      | Description                               |
 | ----------- | ---------------------------------------- | ------------------------------------------ |
-| checkEnable | Boolean                                  | Возможность проходить верификацию          |
-| errors      | List\<[`Error`](#documentdetails.error)> | Список ошибок при верификации пользователя |
+| checkEnable | Boolean                                  | Ability to pass verification again         |
+| errors      | List\<[`Error`](#documentdetails.error)> | List of verification errors                |
 ### `DocumentDetails.Error`
 
-| Name         | Type    | Description        |
-| ------------ | ------ | ------------------ |
-| documentType | String | Документ с ошибкой |
-| message      | String | Descriptionибки    |
+| Name         | Typ    | Description                 |
+| ------------ | ------ | -------------------------   |
+| documentType | String | Document caused the failure |
+| message      | String | Description of the error    |
  
 ## `Card`
 
-Модель содержит информацию о карте.
+Model containing data about card.
 
-| Name            | Type             | Description                          |
-| --------------- | --------------- | ------------------------------------ |
-| id              | String          | Уникальный ключ карты                |
-| createdAt       | Long            | Время добавления карты               |
-| paymentSystem   | String          | Информации о платежной системе карты |
-| number          | String          | Последние четыре цифры номера карты  |
-| expirationMonth | String          | Месяц окончания действия карты       |
-| expirationYear  | String          | Год окончания действия карты         |
-| bank            | [`Bank`](#bank) | Информация о банке                   |
+| Name            | Type            | Description                   |
+| --------------- | --------------- | ----------------------------- |
+| id              | String          | Card ID                       |
+| createdAt       | Long            | Timestamp of creation         |
+| paymentSystem   | String          | Payment system                |
+| number          | String          | Last 4 digits of card number  |
+| expirationMonth | String          | Month of expiration date      |
+| expirationYear  | String          | Year of expiration date       |
+| bank            | [`Bank`](#bank) | Bank info                     |
 
 ## `Bank`
 
@@ -133,110 +134,110 @@ Model containing data about bank.
 
 ### `Bank.Color`
 
-| Name       | Type    | Description                      |
-| ---------- | ------ | -------------------------------- |
-| background | String | Цвет заднего фона карточки банка |
-| foreground | String | Цвет информации о карте          |
+| Name       | Type    | Description                          |
+| ---------- | ------ | ------------------------------------- |
+| background | String | Background color of bank card         |
+| foreground | String | Color of text and info of bank card   |
 
 ## `ConverterResult`
 
-Модель содержит токен для совершение покупки, продажи и дополнительную информацию о состоянии конвертора.
+Model containing buying token, selling token and additional info about the state of converter.
 
 | Name         | Type    | Description                                                                                      |
 | ------------ | ------ | ------------------------------------------------------------------------------------------------ |
-| token        | String | Ключ для пары значений конвертора, необходимый для совершения транзакции с заданными параметрами |
-| currency     | String | Криптовалюта                                                                                     |
-| amount       | String | Сумма криптовалюты                                                                               |
-| fiatCurrency | String | Фиатная валюта                                                                                   |
-| fiatAmount   | String | Сумма для фиатной валюты                                                                         |
+| token        | String | Buying or selling token |
+| currency     | String | Crypto currency                                                                                     |
+| amount       | String | Amount of crypto                                                                               |
+| fiatCurrency | String | Fiat currency                                                                                    |
+| fiatAmount   | String | Amount of fiat                                                      |
 
 ## `Rate`
 
-Модель содержит информацию о курсе выбраной валюты.
+Model containing data about exchange rates.
 
-| Name     | Type    | Description                                      |
-| -------- | ------ | ------------------------------------------------ |
-| from     | String | Валюта относительно который был сформирован курс |
-| to       | String | Валюта в которую был сформирован курс            |
-| type     | String | Type операции `buy`, `sell`                       |
-| rate     | String | Курс для валюты `to`                             |
+| Name     | Type    | Description                    |
+| -------- | ------ | ------------------------------- |
+| from     | String | Source currency                 |
+| to       | String | Destination currency            |
+| type     | String | Type of operation `buy`, `sell` |
+| rate     | String | Exchange rate `to`/`from`       |
 
 ## `TransactionStatus`
 
-Модель содержит информацию о транзакции, такие как идентификатор и статус. Возможны промежуточные состояния статуса с одним из опциональных полей, например для покупки может придти [`Redirect`](#redirect) указывающий на необходимость пройти 3ds, или `isVerifyDescription` указывающий о необходимости ввода дескриптора, для завершения транзакции.
+Model containing data about the transaction such as ID and status. Intermediate status states with one of the optional fields are possible, for example, [`Redirect`](#redirect) may come for a purchase indicating the need to go through 3ds, or` isVerifyDescription` indicating the need to enter a descriptor to complete the transaction.
 
 
 | Name                | Type                      | Description                                                              |
 | ------------------- | ------------------------ | ------------------------------------------------------------------------ |
-| redirect            | [`Redirect?`](#redirect) | Информацию о формирование Url для подтверждения транзакции               |
-| id                  | String                   | Идентификатор транзакции в системе Меркурио                              |
-| status              | String                   | Статус транзакции                                                        |
-| isVerifyDescription | Boolean                  | Флаг указывающий на необходимость подтвердить дескриптор следующим шагом |
+| redirect            | [`Redirect?`](#redirect) | URL info for transaction confirmation                |
+| id                  | String                   | Mercuryo ID of transction                            |
+| status              | String                   | Status of transaction                                                        |
+| isVerifyDescription | Boolean                  | Flag showing whether user needs to enter descriptor on the next step |
 
 ## `Redirect`
 
-Модель указывает на необходимость перехода по URL указанном в объекте
+Model containing data about the need to be redirected to the specified URL.
 
-| Name        | Type             | Description                                           |
-| ----------- | --------------- | ----------------------------------------------------- |
-| form        | List\<FormItem> | Список дополнительной информации для формирования URL |
-| requestType | String          | Type запроса `GET`, `POST`                             |
-| uriTemplate | String          | Адрес                                                 |
+| Name        | Type             | Description                                       |
+| ----------- | --------------- | -------------------------------------------------- |
+| form        | List\<FormItem> | List of additional data items for URL composing    |
+| requestType | String          | Type of request `GET` or `POST`                    |
+| uriTemplate | String          | Address                                            |
 
 ### `Redirect.FormItem`
 
-Модель содержит дополнительную информацию для формирования адреса 
+Model containing data about additional parameters for URL.
 
-| Name     | Type    | Description         |
+| Name     | Type    | Description        |
 | -------- | ------ | ------------------- |
-| key      | String | Ключ                |
-| template | String | Информация по ключу |
+| key      | String | Key                 |
+| template | String | Info about the key  |
 
 ## `TransactionType`
- | Type      | Description                                 |
+
+ | Type     | Description                                 |
  | -------- | ------------------------------------------- |
- | DEPOSIT  | Транзакции поплнения с другого кошелька     |
- | BUY      | Покупка припты через карту                  |
- | SELL     | Продажа крипты через карту                  |
- | WITHDRAW | Перевод крипты на другой кошелек            |
- | REFERRAL | Пополнение кошелька по реферальной програме |
+ | DEPOSIT  | Deposit of crypto from another wallet       |
+ | BUY      | Buying crypto with card                     |
+ | SELL     | Selling crypto to card                      |
+ | WITHDRAW | Withdrawal of crypto to another wallet      |
+ | REFERRAL | Top-up of crypto using referral program     |
 
 ## `EstimateWithdrawFee`
 
-Модель содержит список доступных комиссий.
+Model containing the list of available transaction Fees.
 
-| Name           | Type                 | Description               |
+| Name           | Type                 | Description              |
 | -------------- | ------------------- | ------------------------- |
-| cryptoCurrency | String              | Name     криптовалюты     |
-| fiatCurrency   | String              | Name     фиатной валюты   |
-| fees           | List<[`Fee`](#fee)> | Список доступных комиссий |
+| cryptoCurrency | String              | Crypto currency           |
+| fiatCurrency   | String              | Fiat currency             |
+| fees           | List<[`Fee`](#fee)> | List of available fees    |
 
 ## `Fee`
 
-Модель содержит информацию о комиссии.
+Model containing data about fees.
 
-| Name          | Type           | Description                                                  |
+| Name          | Type          | Description                                                  |
 | ------------- | ------------- | ------------------------------------------------------------ |
-| id            | String        | Идентификатор комиссии                                       |
-| level         | String        | Скорость транзакции, возможные Typeы `slow`, `medium`, `fast` |
-| fee           | String        | Комиссия в криптоввалюте                                     |
-| fiatAmount    | String        | Комиссия в фиате                                             |
-| isPaidByUser  | Boolean       | Указывает будет ли комиссия снята с пользователя             |
-| estimatedTime | EstimatedTime | Ориентировачное время выполнения транзакции                  |
+| id            | String        | ID of the fee                                                |
+| level         | String        | Possible types of transaction, choices are `slow`, `medium`, `fast` |
+| fee           | String        | Fee in crypto                                                |
+| fiatAmount    | String        | Fee in fiat                                                  |
+| isPaidByUser  | Boolean       | Shows whether fee is deducted from user's balance            |
+| estimatedTime | EstimatedTime | Expected time of transaction                                 |
 
 ## `EstimatedTime`
 
-Модель содержит информацию о времени совершения транзакции.
+Model containing data about estimated time of transaction.
 
-
-| Name     | Type  | Description                 |
+| Name     | Type | Description                 |
 | -------- | ---- | --------------------------- |
-| max      | Int? | Максимальное время перевода |
-| min      | Int? | Минимальное время перевода  |
+| max      | Int? | Max transaction time        |
+| min      | Int? | Min transaction time        |
 
 ## `Limit`
 
-Model containting info about the user's limits.
+Model containting data about the user's limits.
 
 | Name           | Type   | Description                                                  |
 | -------------- | ------ | ------------------------------------------------------------ |
@@ -257,4 +258,4 @@ Pair of limits for fiat and crypto currencies.
 | Name        | Type              | Description              |
 | ----------- | ----------------- | ------------------------ |
 | fiatLimit   | [`Limit`](#limit) | Limit for fiat           |
-| cryptoLimit | [`Limit`](#limit) | Limit for crypti         |
+| cryptoLimit | [`Limit`](#limit) | Limit for crypto         |

@@ -36,6 +36,7 @@ dependencies {
 
 ## Usage
 
+– [Quickstart](documentation/getstarted_en.md)
 - 🔓 Authentication [EN](documentation/session_en.md) | [RU](documentation/session.md)
 - 🗄 Wallets [EN](documentation/wallet_en.md) | [RU](documentation/wallet.md)
 - 💰 Operations (buy/sell/withdraw crypto)  [EN](documentation/operations_en.md) | [RU](documentation/operations.md)

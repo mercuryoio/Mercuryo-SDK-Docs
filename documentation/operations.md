@@ -151,7 +151,7 @@ withdraw.commit(currency: String, address: String, amount: String, estimateId: S
 | amount     | Сумма для перевода в крипте                                                                                           |
 | estimateId | Идентификатор комиссии выбранной пользователем, смотреть метод      [`withdraw.getEstimateFee`](#комиссия-за-перевод) |
 
-## Подтверждени перевода
+## Подтверждение перевода
 
 Для завершения необходимо подтвердить перевод.
 
