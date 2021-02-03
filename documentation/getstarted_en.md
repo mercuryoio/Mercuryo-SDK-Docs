@@ -27,7 +27,7 @@ SDK currently is publicly available for Android while being in closed Beta for i
 
 Add it in your root build.gradle at the end of repositories:
 
-```Kotlin
+```Groovy
 allprojects {
     repositories {
         ...
@@ -38,9 +38,9 @@ allprojects {
 
 Add dependency:
 
-```Kotlin
+```Groovy
 dependencies {
-    implementation 'com.github.adaptyteam:AdaptySDK-Android:0.3.1'
+    implementation 'io.mercuryo.sdk:core:0.1.8'
 }
 ```
 
@@ -91,8 +91,14 @@ Mercuryo user has several wallets for each crypto currency with a correspondent 
 
 ```kotlin
 val wallet = mercuryo.wallet
-wallet.getWallets(): List<Wallet>
-wallet.getTransactions(type: TransactionType?, limit: Int, offset: Int, currency: String?): List<Transaction> 
+
+CoroutineScope.launch{
+    val wallets: List<Wallet> = wallet.getWallets()
+
+    val transactions: List<Transaction> = wallet.getTransactions(type: TransactionType? , limit: Int, offset: Int, currency: String?)
+}
+
+
 ```
 
 ## Operations
@@ -108,8 +114,22 @@ For example, the following methods may be used for buying crypto providing user'
 ```kotlin
 val mercuryo: Mercuryo = Mercuryo.create(...)  
 val buy: Buy = mercuryo.operations.buy
-buy.convert(fromCurrency: String, toCurrency: String, amount: String)
-buy.commit(cardId: String, cvv: String, buyToken: String, redirectUrl: String)
+
+CoroutineScope.launch{
+    val result: ConverterResult = buy.convert(
+        fromCurrency = "BTC", 
+        toCurrency = "EUR", 
+        amount = "1"
+    )
+
+    val status: TransactionStatus = buy.commit(
+        cardId = "yourCardId", 
+        cvv = "yourCardCvc", 
+        buyToken = result.token, 
+        redirectUrl = "http://my.mercuryo.io/orders?invoice={invoice_id}"
+    )
+}
+
 ```
 
 ## Cards
