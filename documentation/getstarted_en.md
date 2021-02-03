@@ -54,6 +54,8 @@ The API method for silent login receives the following parameters:
 
 The method checks whether partner_token is valid, user with specified user_phone exists and allowed to log in.
 
+Read more about server-to-server communication [here](silent_login.md) 
+
 If all the conditions are met the method logs user in and issues an `access_token` in the response which should be passed to SDK.
 
 General data flow is shown below:
