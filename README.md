@@ -13,7 +13,7 @@ SDK is written on Koltin Multiplatform with goal to provide same shared code to 
 
 ## Installation
 
-## Android
+### Android
 ### Gradle
 
 Add it in your root build.gradle at the end of repositories:
@@ -35,8 +35,8 @@ dependencies {
 }
 ```
 
-##iOS
-###CocoaPods
+### iOS
+### CocoaPods
 Add the Mercuryo-SDK pod into your Podfile and run pod install.
 ```ruby
     target :YourTargetName do
