@@ -38,6 +38,7 @@ Parameters:
 | last_name      | String | User's last name |
 | birthday      | String | User's birthday, format '2000-01-01' |
 | email      | String | User's email |
+| share_token      | String | SumSub's share token |
 | document      | Array | User's documents |
 |     type      | String | User's document type (eq passport, id_card, driver_license) |
 |     files      | String | User's document files. document.files must contain an array with filename as key and file content as value. For current document type requirements for list of files differs. id_card. Count of files must be 3. File names must be 'face.', 'side-1.', 'side-2.'; passport. Count of files must be 2. File names must be 'face.', 'side-1.'; driver_license. Count of files must be 3. File names must be 'face.', 'side-1.', 'side-2.'. Extensions in file names must correspond .jpg, .png. |
