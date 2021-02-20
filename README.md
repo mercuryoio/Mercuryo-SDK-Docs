@@ -56,12 +56,12 @@ Add the Mercuryo-SDK pod into your Podfile and run pod install.
 
 ## Usage
 
-– [Quickstart](documentation/getstarted_en.md)
-- 🔓 Authentication [EN](documentation/session_en.md) | [RU](documentation/session.md)
-- 🗄 Wallets [EN](documentation/wallet_en.md) | [RU](documentation/wallet.md)
-- 💰 Operations (buy/sell/withdraw crypto)  [EN](documentation/operations_en.md) | [RU](documentation/operations.md)
-- 💳 Cards [EN](documentation/cards_en.md) | [RU](documentation/cards_ru.md)
+– [Quickstart](https://mercuryo.gitbook.io/mobilesdk-en/)
+- 🔓 [Authentication](https://mercuryo.gitbook.io/mobilesdk-en/authentication)
+- 🗄 [Wallets](https://mercuryo.gitbook.io/mobilesdk-en/wallets)
+- 💰 [Operations (buy/sell/withdraw crypto)](https://mercuryo.gitbook.io/mobilesdk-en/operations)
+- 💳 [Cards](https://mercuryo.gitbook.io/mobilesdk-en/cards)
 
 ## Reference
 
-SDK models [EN](documentation/models_en.md) | [RU](documentation/models.md)
+SDK models [EN](https://mercuryo.gitbook.io/reference-en/) | [RU](https://mercuryo.gitbook.io/reference-ru/)
